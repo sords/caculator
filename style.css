@@ -1,0 +1,46 @@
+#header {
+    height: 100px;
+    border: 2px solid;
+    margin-bottom: 20px;
+}
+
+#main {
+    display: flex;
+    justify-content: center;
+}
+
+#calcy {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 470px;
+    width: 300px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#display {
+    border: 2px solid black;
+    height: 90px;
+    width: 270px;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: right;
+}
+#lastenter,#nowenter {
+    margin: 10px;
+    font-weight: bolder;
+    font-size: x-large;
+}
+#magic {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+button {
+    height: 60px;
+    width: 60px;
+    margin: 5px;
+    border-radius: 10px;
+}
