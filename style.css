@@ -26,12 +26,17 @@
     width: 270px;
     margin: 10px;
     border-radius: 10px;
-    text-align: right;
+    /* text-align: right; */
 }
 #lastenter,#nowenter {
+    align-self: flex-end;
     margin: 10px;
     font-weight: bolder;
     font-size: x-large;
+    overflow:hidden ;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    white-space: nowrap;
 }
 #magic {
     display: flex;
