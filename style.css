@@ -1,7 +1,9 @@
-body{
+html,body{
     margin: 0px;
 }
-
+html{
+    background-color: black;
+}
 #header {
     height: 100px;
     text-align: center;
@@ -68,7 +70,7 @@ button {
 
 
 #footer,a{
-    height: 30px;
+    /* height: 30px; */
     text-align: center;
     background-color: black;
      padding-top: 25px;
