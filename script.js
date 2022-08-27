@@ -3,9 +3,11 @@ let displaynow = document.getElementById('nowenter');
 let enternum = '';
 let enterbefore = enternum;
 let symbol = ''
+// for not repeating twice of equal to symbol
 let reepeat = 1;
 let pointchecker = 0;
-//let magic = 0;
+//for changing the symbols of addition and substraction and etc
+let magic = 0;
 
 
 function add(a, b) {
@@ -23,8 +25,8 @@ function division(a, b) {
 function percentage(a, b) {
     return (a / b) * 100
 }
-function squart(a,b) {
-    return (a**b)
+function squart(a, b) {
+    return (a ** b)
 }
 
 function operate(a, operator, b) {
@@ -35,13 +37,13 @@ function operate(a, operator, b) {
         return subtract(a, b);
     }
     if (operator === '*') {
-        if(pointchecker >= 1){
+        if (pointchecker >= 1) {
             return multiply(a, b).toFixed(3);
         }
         return multiply(a, b);
     }
     if (operator === '/') {
-        if(point >= 1){
+        if (pointchecker >= 1) {
             return division(a, b).toFixed(3);
         }
         return division(a, b)
@@ -50,114 +52,90 @@ function operate(a, operator, b) {
         return percentage(a, b)
     }
     if (operator === '^') {
-        return squart(a,b)
+        return squart(a, b)
     }
 }
 
-function getondisplay(num,symbol = '',fromequal = '') {
-    if (symbol !== '')
-        diplaylast.textContent = num + ' ' + symbol;
-     if(enternum.includes('.') && fromequal === 'fromequal')
-       pointchecker++;
+function getondisplay(num, symbol1 = '', fromequal = '') {
+    if (symbol1 !== '')
+        diplaylast.textContent = num + ' ' + symbol1;
+    if (enternum.includes('.') && fromequal === 'fromequal')
+        pointchecker++;
     displaynow.textContent = num;
 }
 
 function numberentered(value) {
-    // if (magic === 1) 
-    //     magic--;
-    if (enternum === '0') {
-        enternum = ''
-    }
+    if (magic === 1)
+        magic--;
+    if (enternum === '0') 
+        enternum = '';
     if (value === '.') {
-        if (pointchecker >= 1) {
-            return
-        }
-        //point was incrementing
-        if (enternum === '') {
-            enternum = '0' + enternum
-        }
-        pointchecker++
+        if (pointchecker >= 1)
+            return;
+        if (enternum === '')
+            enternum = '0' + enternum;
+        pointchecker++;
     }
-    enternum += value
+    enternum += value;
     getondisplay(enternum, '')
 }
 
 function symbolenter(value = '-') {
     if (enternum === '') {
-        // if (magic > 0) {
-        //     let book = (enterbefore)
-        //     diplaylast.textContent = book + value
-        // }
-        return
+        if (magic > 0)
+            diplaylast.textContent = enterbefore + value;
+        return;
     }
-    enterbefore = enternum
+    enterbefore = enternum;
     if (enternum.includes('.')) {
-        if (pointchecker >= 1) 
+        if (pointchecker >= 1)
             enterbefore = enternum + '0';
     }
-    symbol = value
+    symbol = value;
     magic++;
-    diplaylast.textContent = enterbefore + value
-   if(pointchecker >= 1)
-      pointchecker--;
+    diplaylast.textContent = enterbefore + value;
+    if (pointchecker >= 1)
+        pointchecker--;
     getondisplay(enternum)
     enternum = '';
-    if (reepeat === 0) 
+    if (reepeat === 0)
         return;
     reepeat--;
 }
-let ran;
-let rose;
-
 
 function equalto() {
-    // if (magic === 1) 
-    //     magic--;
-    let dec;
+    if (magic === 1)
+        magic--;
     reepeat++
     if (enternum === '' || reepeat > 1) {
         reepeat--
-        return
-    } else {
-        ran = Number(enternum);
-        rose = Number(enterbefore);
+        return;
     }
-    let man = operate(rose, symbol, ran);
+    enternum = Number(enternum);
+    enterbefore = Number(enterbefore);
+    let result = operate(enterbefore, symbol, enternum);
     if (pointchecker >= 1) {
-        enternum = enternum + '0'
-    }
-    dec = enternum + ' ='
-    diplaylast.textContent += dec;
-    if (pointchecker >= 1) {
+        enternum = enternum + '0' 
         pointchecker--;
     }
-    dec = enternum
-    enternum = man + '';
-    getondisplay(man,'','fromequal')
+    enterbefore = enternum + ' =';
+    diplaylast.textContent += enterbefore;
+    enterbefore = enternum
+    enternum = result + '';
+    getondisplay(result, '', 'fromequal')
 }
 
 function backclear() {
-    let gaw = enternum;
-    let gas;
-    let lgaw
-    gas = gaw.toString().slice(0, -1)
-    if (gas.includes('.')) {
-        pointchecker++
-    } //else {
-    if (pointchecker >= 1) {
-        pointchecker--
-    }
-
-    //}
-    console.log(gas, gas.includes('.'))
-    if (gas === '') {
-        enternum = '0'
-        lgaw = '0'
-    } else {
-        enternum = gas + ''
-        lgaw = gas + ''
-    }
-    getondisplay(lgaw)
+    enternum = enternum.toString().slice(0, -1)
+    if (enternum.includes('.')) 
+        pointchecker++;
+    if (pointchecker >= 1) 
+        pointchecker--;
+    if (enternum === '') 
+        enternum = '0';
+    else 
+        enternum = enternum + '';
+    getondisplay(enternum)
 }
 
 function allclear(num) {
